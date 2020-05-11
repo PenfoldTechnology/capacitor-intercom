@@ -20,6 +20,15 @@ public class IntercomPlugin: CAPPlugin {
     #endif
 
     NotificationCenter.default.addObserver(self, selector: #selector(didRegisterWithToken(notification:)), name: Notification.Name(CAPNotifications.DidRegisterForRemoteNotificationsWithDeviceToken.name()), object: nil)
+
+    NotificationCenter.default.addObserver(self,
+                                           selector: #selector(intercomDidStartNewConversation),
+                                           name: NSNotification.Name.IntercomDidStartNewConversation,
+                                           object: nil)
+  }
+
+  @objc func intercomDidStartNewConversation() {
+    notifyListeners("newConversation", data: [:])
   }
 
   @objc func didRegisterWithToken(notification: NSNotification) {
