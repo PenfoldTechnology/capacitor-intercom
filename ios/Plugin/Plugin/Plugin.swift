@@ -15,6 +15,10 @@ public class IntercomPlugin: CAPPlugin {
     // let appId = getConfigValue("ios-appId") as? String ?? "ADD_IN_CAPACITOR_CONFIG_JSON"
     // Intercom.setApiKey(apiKey, forAppId: appId)
 
+    #if DEBUG
+      Intercom.enableLogging()
+    #endif
+
     NotificationCenter.default.addObserver(self, selector: #selector(didRegisterWithToken(notification:)), name: Notification.Name(CAPNotifications.DidRegisterForRemoteNotificationsWithDeviceToken.name()), object: nil)
   }
 
